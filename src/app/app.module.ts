@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CardComponent } from './components/card/card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,7 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 		HomeComponent,
 		ThemeToggleComponent
 	],
-	imports: [BrowserModule, AppRoutingModule],
+	imports: [BrowserModule, AppRoutingModule, FormsModule],
 	providers: [],
 	bootstrap: [AppComponent]
 })

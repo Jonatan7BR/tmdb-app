@@ -1,1 +1,17 @@
-<p>home works!</p>
+<form class="search-form" ngNativeValidate>
+	<input type="search" [(ngModel)]="searchQuery" class="searchfield" required />
+	<button
+		type="submit"
+		class="searchsubmit material-symbols-outlined"
+		title="Search"
+	>
+		search
+	</button>
+	<button
+		type="reset"
+		class="searchreset material-symbols-outlined"
+		title="Clear"
+	>
+		close
+	</button>
+</form>
