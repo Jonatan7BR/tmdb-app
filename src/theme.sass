@@ -1,0 +1,14 @@
+body
+    --sans-serif: 'Quattrocento Sans',sans-serif
+    --serif: 'Merriweather',serif
+
+    &.lightmode
+        --page-background: #EEE
+        --text-color: #000
+    
+    &.darkmode
+        --page-background: #222
+        --text-color: #FFF
+    
+    &:not(.darkmode-preloading)
+        transition: all 200ms linear
