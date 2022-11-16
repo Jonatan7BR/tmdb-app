@@ -1,5 +1,11 @@
 <form class="search-form" ngNativeValidate>
-	<input type="search" [(ngModel)]="searchQuery" class="searchfield" required />
+	<input
+		type="search"
+		[(ngModel)]="searchQuery"
+		name="searchQuery"
+		class="searchfield"
+		required
+	/>
 	<button
 		type="submit"
 		class="searchsubmit material-symbols-outlined"
@@ -17,5 +23,11 @@
 </form>
 
 <div class="search-results">
-	<app-card></app-card>
+	<app-card
+		*ngFor="let movie of fakeData"
+		[poster]="movie.poster"
+		[title]="movie.title"
+		[releaseDate]="movie.releaseDate"
+		[overview]="movie.overview"
+	></app-card>
 </div>
