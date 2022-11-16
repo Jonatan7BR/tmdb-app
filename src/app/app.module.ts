@@ -3,21 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { CardComponent } from './components/card/card.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
-import { FormsModule } from '@angular/forms';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		CardComponent,
-		HomeComponent,
-		ThemeToggleComponent
-	],
-	imports: [BrowserModule, AppRoutingModule, FormsModule],
+	declarations: [AppComponent],
+	imports: [BrowserModule, AppRoutingModule, ComponentsModule],
 	providers: [],
 	bootstrap: [AppComponent]
 })

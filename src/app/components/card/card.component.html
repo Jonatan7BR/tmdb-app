@@ -1,5 +1,10 @@
 <div class="details-card">
-	<img class="poster" [src]="poster" alt="Poster" />
+	<img
+		class="poster"
+		[src]="poster"
+		alt="Poster"
+		[src-fallback]="placeholderPoster"
+	/>
 	<div class="details">
 		<h3 class="title _nomargin">{{ title }}</h3>
 		<p class="releasedate">
