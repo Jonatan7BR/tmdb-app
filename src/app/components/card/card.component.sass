@@ -6,15 +6,27 @@
     display: grid
     grid-template-columns: 30% 70%
     gap: 5px
-    max-height: 230px
-    overflow: hidden auto
+    height: 230px
 
     > .poster
         display: block
         max-width: 100%
 
     > .details
+        overflow: hidden
         height: 100%
+        scrollbar-width: thin
+        scrollbar-color: var(--scrollbar-fg) var(--scrollbar-bg)
+
+        &:hover
+            overflow-y: auto
+
+        &::-webkit-scrollbar
+            width: 5px
+            background-color: var(--scrollbar-bg)
+
+            &-thumb
+                background-color: var(--scrollbar-fg)
 
         > .title
             font-size: 16pt
