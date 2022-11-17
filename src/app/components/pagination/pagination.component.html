@@ -4,6 +4,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(1)"
+		title="Go to first page"
 	>
 		«
 	</button>
@@ -13,12 +14,13 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage - 1)"
+		title="Go to previous page"
 	>
 		‹
 	</button>
 
 	<button *ngIf="currentPage > 3" type="button" class="button" disabled>
-		...
+		…
 	</button>
 
 	<button
@@ -26,6 +28,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage - 2)"
+		[title]="'Go to page ' + (currentPage - 2)"
 	>
 		{{ currentPage - 2 }}
 	</button>
@@ -35,6 +38,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage - 1)"
+		[title]="'Go to page ' + (currentPage - 1)"
 	>
 		{{ currentPage - 1 }}
 	</button>
@@ -46,6 +50,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage + 1)"
+		[title]="'Go to page ' + (currentPage + 1)"
 	>
 		{{ currentPage + 1 }}
 	</button>
@@ -55,6 +60,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage + 2)"
+		[title]="'Go to page ' + (currentPage + 2)"
 	>
 		{{ currentPage + 2 }}
 	</button>
@@ -65,7 +71,7 @@
 		class="button"
 		disabled
 	>
-		...
+		…
 	</button>
 
 	<button
@@ -73,6 +79,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(currentPage + 1)"
+		title="Go to next page"
 	>
 		›
 	</button>
@@ -82,6 +89,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(totalPages)"
+		title="Go to last page"
 	>
 		»
 	</button>
