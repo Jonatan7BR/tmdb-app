@@ -22,7 +22,7 @@
 	</button>
 </form>
 
-<div class="search-results">
+<div class="search-results" #searchResults>
 	<app-card
 		*ngFor="let movie of fakeData"
 		[poster]="movie.poster"
@@ -36,6 +36,6 @@
 	<app-pagination
 		[currentPage]="currentPage"
 		[totalPages]="totalPages"
-		(pageChange)="currentPage = $event"
+		(pageChange)="changePage($event)"
 	></app-pagination>
 </div>

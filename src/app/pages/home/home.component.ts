@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'app-home',
@@ -9,6 +9,8 @@ export class HomeComponent implements OnInit {
 	searchQuery = '';
 	currentPage = 1;
 	totalPages = 15;
+
+	@ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
 
 	fakeData = [
 		{
@@ -86,4 +88,9 @@ export class HomeComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit(): void {}
+
+	changePage(page: number): void {
+		this.currentPage = page;
+		this.searchResults.nativeElement.scrollIntoView({ behavior: 'smooth' });
+	}
 }
