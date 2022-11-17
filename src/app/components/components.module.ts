@@ -4,10 +4,21 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
 import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './card/card.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
-	declarations: [HeaderComponent, CardComponent, ThemeToggleComponent],
+	declarations: [
+		HeaderComponent,
+		CardComponent,
+		ThemeToggleComponent,
+		PaginationComponent
+	],
 	imports: [CommonModule, ImgFallbackModule],
-	exports: [HeaderComponent, CardComponent, ThemeToggleComponent]
+	exports: [
+		HeaderComponent,
+		CardComponent,
+		ThemeToggleComponent,
+		PaginationComponent
+	]
 })
 export class ComponentsModule {}

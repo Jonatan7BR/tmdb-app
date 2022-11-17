@@ -1,0 +1,88 @@
+<div class="pagination-buttons">
+	<button
+		*ngIf="currentPage > 1"
+		type="button"
+		class="button"
+		(click)="changePage(1)"
+	>
+		«
+	</button>
+
+	<button
+		*ngIf="currentPage > 1"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage - 1)"
+	>
+		‹
+	</button>
+
+	<button *ngIf="currentPage > 3" type="button" class="button" disabled>
+		...
+	</button>
+
+	<button
+		*ngIf="currentPage > 2"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage - 2)"
+	>
+		{{ currentPage - 2 }}
+	</button>
+
+	<button
+		*ngIf="currentPage > 1"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage - 1)"
+	>
+		{{ currentPage - 1 }}
+	</button>
+
+	<button type="button" class="button active">{{ currentPage }}</button>
+
+	<button
+		*ngIf="currentPage < totalPages"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage + 1)"
+	>
+		{{ currentPage + 1 }}
+	</button>
+
+	<button
+		*ngIf="currentPage < totalPages - 1"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage + 2)"
+	>
+		{{ currentPage + 2 }}
+	</button>
+
+	<button
+		*ngIf="currentPage < totalPages - 2"
+		type="button"
+		class="button"
+		disabled
+	>
+		...
+	</button>
+
+	<button
+		*ngIf="currentPage < totalPages"
+		type="button"
+		class="button"
+		(click)="changePage(currentPage + 1)"
+	>
+		›
+	</button>
+
+	<button
+		*ngIf="totalPages > 1 && currentPage < totalPages"
+		type="button"
+		class="button"
+		(click)="changePage(totalPages)"
+	>
+		»
+	</button>
+</div>

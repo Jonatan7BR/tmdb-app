@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 	searchQuery = '';
+	currentPage = 1;
+	totalPages = 15;
 
 	fakeData = [
 		{

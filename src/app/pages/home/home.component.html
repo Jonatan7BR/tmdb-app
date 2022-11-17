@@ -31,3 +31,11 @@
 		[overview]="movie.overview"
 	></app-card>
 </div>
+
+<div class="search-pagination">
+	<app-pagination
+		[currentPage]="currentPage"
+		[totalPages]="totalPages"
+		(pageChange)="currentPage = $event"
+	></app-pagination>
+</div>
