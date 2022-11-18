@@ -1,4 +1,4 @@
-<form class="search-form" ngNativeValidate>
+<form class="search-form" ngNativeValidate (ngSubmit)="fetchMovies()">
 	<input
 		type="search"
 		[(ngModel)]="searchQuery"
@@ -24,7 +24,7 @@
 
 <div class="search-results" #searchResults>
 	<app-card
-		*ngFor="let movie of fakeData"
+		*ngFor="let movie of movies"
 		[poster]="movie.poster"
 		[title]="movie.title"
 		[releaseDate]="movie.releaseDate"

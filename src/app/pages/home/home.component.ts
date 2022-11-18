@@ -1,4 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as moment from 'moment';
+import { Movie } from 'src/app/models/movie.model';
+import { MovieService } from 'src/app/services/movie.service';
+import { POSTER_BASE_URL } from 'src/app/utils/tmdb.utils';
 
 @Component({
 	selector: 'app-home',
@@ -7,90 +11,33 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 	searchQuery = '';
-	currentPage = 1;
-	totalPages = 15;
+	currentPage = 0;
+	totalPages = 0;
+	movies: Movie[] = [];
 
 	@ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
 
-	fakeData = [
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		},
-		{
-			poster: 'https://via.placeholder.com/600x900.webp',
-			title: 'Sample title',
-			releaseDate: new Date(),
-			overview:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis nulla at enim mollis sollicitudin. Nunc mauris magna, feugiat in pharetra at, luctus sed eros. Integer pulvinar nunc dolor, non lobortis urna tempus non. Nunc sit amet mollis lorem. Aliquam ligula dui, laoreet nec sapien in, cursus convallis libero. Curabitur vel ligula ultricies, volutpat purus vitae, aliquet est. Praesent pharetra blandit urna, vel aliquet velit ultricies a. Curabitur purus massa, fringilla sollicitudin cursus et, vestibulum id ex. Maecenas leo nunc, fringilla ut est ut, placerat vulputate purus. Maecenas mattis quam nec pharetra hendrerit. Ut et tempor quam, quis accumsan mi. Nunc in ex non felis tempus cursus at ut turpis.'
-		}
-	];
-
-	constructor() {}
+	constructor(private movieService: MovieService) {}
 
 	ngOnInit(): void {}
+
+	fetchMovies(): void {
+		this.movieService
+			.getMovies(this.searchQuery, this.currentPage)
+			.subscribe(response => {
+				this.totalPages = response.total_pages;
+				this.movies = response.results.map(result => ({
+					poster: POSTER_BASE_URL + result.poster_path,
+					title: result.title,
+					releaseDate: moment(result.release_date).toDate(),
+					overview: result.overview
+				}));
+			});
+	}
 
 	changePage(page: number): void {
 		this.currentPage = page;
 		this.searchResults.nativeElement.scrollIntoView({ behavior: 'smooth' });
+		this.fetchMovies();
 	}
 }
