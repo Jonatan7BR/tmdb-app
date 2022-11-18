@@ -89,7 +89,7 @@
 		type="button"
 		class="button"
 		(click)="changePage(totalPages)"
-		title="Go to last page"
+		[title]="'Go to last page (' + totalPages + ')'"
 	>
 		»
 	</button>

@@ -11,8 +11,10 @@ import { POSTER_BASE_URL } from 'src/app/utils/tmdb.utils';
 })
 export class HomeComponent implements OnInit {
 	searchQuery = '';
-	currentPage = 0;
+	currentPage = 1;
 	totalPages = 0;
+	noResults = false;
+	searched = '';
 	movies: Movie[] = [];
 
 	@ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
 					releaseDate: moment(result.release_date).toDate(),
 					overview: result.overview
 				}));
+				this.noResults = this.movies.length === 0;
+				this.searched = this.searchQuery;
 			});
 	}
 

@@ -23,16 +23,21 @@
 </form>
 
 <div class="search-results" #searchResults>
-	<app-card
-		*ngFor="let movie of movies"
-		[poster]="movie.poster"
-		[title]="movie.title"
-		[releaseDate]="movie.releaseDate"
-		[overview]="movie.overview"
-	></app-card>
+	<ng-container *ngIf="movies.length > 0; else noMovies">
+		<app-card
+			*ngFor="let movie of movies"
+			[poster]="movie.poster"
+			[title]="movie.title"
+			[releaseDate]="movie.releaseDate"
+			[overview]="movie.overview"
+		></app-card>
+	</ng-container>
+	<ng-template #noMovies>
+		<p *ngIf="noResults">No results found for "{{ searched }}"</p>
+	</ng-template>
 </div>
 
-<div class="search-pagination">
+<div *ngIf="movies.length > 0" class="search-pagination">
 	<app-pagination
 		[currentPage]="currentPage"
 		[totalPages]="totalPages"
