@@ -8,24 +8,26 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./theme-toggle.component.scss']
 })
 export class ThemeToggleComponent implements OnInit, OnDestroy {
+
   isDarkMode!: boolean;
   themeListener!: Subscription;
 
-  constructor(private theme: ThemeService) {}
+  constructor (private theme: ThemeService) {}
 
-  ngOnInit(): void {
-    this.themeListener = this.theme.listenTheme().subscribe(isDarkMode => {
+  ngOnInit (): void {
+    this.themeListener = this.theme.listenTheme().subscribe((isDarkMode): void => {
       if (isDarkMode !== null) {
         this.isDarkMode = isDarkMode;
       }
     });
   }
 
-  toggleTheme(): void {
+  toggleTheme (): void {
     this.theme.changeTheme(!this.isDarkMode);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy (): void {
     this.themeListener.unsubscribe();
   }
+
 }

@@ -10,12 +10,14 @@ const { apiBase, apiKey } = environment;
   providedIn: 'root'
 })
 export class MovieService {
-  constructor(private http: HttpClient) {}
 
-  getMovies(query: string, page: number = 1): Observable<MovieResponse> {
-    let encodedQuery = encodeURI(query);
+  constructor (private http: HttpClient) {}
+
+  getMovies (query: string, page: number = 1): Observable<MovieResponse> {
+    const encodedQuery = encodeURI(query);
     return this.http.get<MovieResponse>(
       `${apiBase}search/movie?api_key=${apiKey}&page=${page}&query=${encodedQuery}`
     );
   }
+
 }

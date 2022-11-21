@@ -7,11 +7,11 @@ export interface Movie {
 
 export interface MovieResponse {
   page: number;
-  results: Array<{
+  results: {
     poster_path: string | null;
     overview: string;
     release_date: string;
     title: string;
-  }>;
+  }[];
   total_pages: number;
 }

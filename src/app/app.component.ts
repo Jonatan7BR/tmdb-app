@@ -8,21 +8,22 @@ import { ThemeService } from './services/theme.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+
   title = 'tmdb-app';
 
   themeListener!: Subscription;
 
-  constructor(private theme: ThemeService) {}
+  constructor (private theme: ThemeService) { }
 
-  ngOnInit(): void {
-    this.themeListener = this.theme.listenTheme().subscribe(isDarkMode => {
+  ngOnInit (): void {
+    this.themeListener = this.theme.listenTheme().subscribe((isDarkMode): void => {
       if (isDarkMode !== null) {
         this.changeTheme(isDarkMode);
       }
     });
 
     let userPrefersDarkMode = false;
-    let themePreference = localStorage.getItem('darkMode');
+    const themePreference = localStorage.getItem('darkMode');
     if (themePreference !== null) {
       userPrefersDarkMode = themePreference === '1';
     } else {
@@ -33,7 +34,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.theme.changeTheme(userPrefersDarkMode);
   }
 
-  private changeTheme(isDarkMode: boolean): void {
+  ngOnDestroy (): void {
+    this.themeListener.unsubscribe();
+  }
+
+  private changeTheme (isDarkMode: boolean): void {
     if (isDarkMode) {
       document.body.classList.remove('lightmode');
       document.body.classList.add('darkmode');
@@ -47,7 +52,4 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.themeListener.unsubscribe();
-  }
 }

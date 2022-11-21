@@ -10,6 +10,9 @@ import { POSTER_BASE_URL } from 'src/app/utils/tmdb.utils';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
+
   searchQuery = '';
   currentPage = 1;
   totalPages = 0;
@@ -17,18 +20,16 @@ export class HomeComponent implements OnInit {
   searched = '';
   movies: Movie[] = [];
 
-  @ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
+  constructor (private movieService: MovieService) {}
 
-  constructor(private movieService: MovieService) {}
+  ngOnInit (): void {}
 
-  ngOnInit(): void {}
-
-  fetchMovies(): void {
+  fetchMovies (): void {
     this.movieService
       .getMovies(this.searchQuery, this.currentPage)
-      .subscribe(response => {
+      .subscribe((response): void => {
         this.totalPages = response.total_pages;
-        this.movies = response.results.map(result => ({
+        this.movies = response.results.map((result): Movie => ({
           poster: POSTER_BASE_URL + result.poster_path,
           title: result.title,
           releaseDate: moment(result.release_date).toDate(),
@@ -39,9 +40,10 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  changePage(page: number): void {
+  changePage (page: number): void {
     this.currentPage = page;
     this.searchResults.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.fetchMovies();
   }
+
 }
