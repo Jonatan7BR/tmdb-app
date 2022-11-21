@@ -17,6 +17,7 @@
 		&.active {
 			color: var(--pagination-button-active-text);
 		}
+
 		&:disabled {
 			opacity: 80%;
 			cursor: initial;
