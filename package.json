@@ -46,7 +46,6 @@
   },
   "lint-staged": {
     "*.html": "prettier --parser angular --write --single-quote",
-    "*.scss": "prettier --parser scss --write --single-quote",
-    "*.ts": "prettier --parser babel-ts --write --single-quote --arrow-parens avoid --trailing-comma none"
-  }
+    "*.scss": "prettier --parser scss --write --single-quote"
+   }
 }
