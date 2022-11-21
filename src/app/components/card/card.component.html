@@ -1,1 +1,15 @@
-<p>card works!</p>
+<div class="details-card">
+	<img
+		class="poster"
+		[src]="poster"
+		alt="Poster"
+		[src-fallback]="placeholderPoster"
+	/>
+	<div class="details">
+		<h3 class="title _nomargin">{{ title }}</h3>
+		<p class="releasedate">
+			<strong>Released:</strong> {{ releaseDate | date }}
+		</p>
+		<p class="description">{{ overview }}</p>
+	</div>
+</div>

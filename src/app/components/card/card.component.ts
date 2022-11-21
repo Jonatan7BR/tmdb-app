@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-card',
 	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.sass']
+	styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
-	constructor() {}
+export class CardComponent {
+	@Input() poster!: string;
+	@Input() title!: string;
+	@Input() releaseDate!: Date;
+	@Input() overview!: string;
 
-	ngOnInit(): void {}
+	placeholderPoster = 'https://via.placeholder.com/600x900.webp';
 }
