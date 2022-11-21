@@ -7,15 +7,15 @@ import { MovieResponse } from '../models/movie.model';
 const { apiBase, apiKey } = environment;
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class MovieService {
-	constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-	getMovies(query: string, page: number = 1): Observable<MovieResponse> {
-		let encodedQuery = encodeURI(query);
-		return this.http.get<MovieResponse>(
-			`${apiBase}search/movie?api_key=${apiKey}&page=${page}&query=${encodedQuery}`
-		);
-	}
+  getMovies(query: string, page: number = 1): Observable<MovieResponse> {
+    let encodedQuery = encodeURI(query);
+    return this.http.get<MovieResponse>(
+      `${apiBase}search/movie?api_key=${apiKey}&page=${page}&query=${encodedQuery}`
+    );
+  }
 }

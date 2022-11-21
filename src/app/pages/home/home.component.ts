@@ -5,43 +5,43 @@ import { MovieService } from 'src/app/services/movie.service';
 import { POSTER_BASE_URL } from 'src/app/utils/tmdb.utils';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-	searchQuery = '';
-	currentPage = 1;
-	totalPages = 0;
-	noResults = false;
-	searched = '';
-	movies: Movie[] = [];
+  searchQuery = '';
+  currentPage = 1;
+  totalPages = 0;
+  noResults = false;
+  searched = '';
+  movies: Movie[] = [];
 
-	@ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
+  @ViewChild('searchResults') searchResults!: ElementRef<HTMLDivElement>;
 
-	constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService) {}
 
-	ngOnInit(): void {}
+  ngOnInit(): void {}
 
-	fetchMovies(): void {
-		this.movieService
-			.getMovies(this.searchQuery, this.currentPage)
-			.subscribe(response => {
-				this.totalPages = response.total_pages;
-				this.movies = response.results.map(result => ({
-					poster: POSTER_BASE_URL + result.poster_path,
-					title: result.title,
-					releaseDate: moment(result.release_date).toDate(),
-					overview: result.overview
-				}));
-				this.noResults = this.movies.length === 0;
-				this.searched = this.searchQuery;
-			});
-	}
+  fetchMovies(): void {
+    this.movieService
+      .getMovies(this.searchQuery, this.currentPage)
+      .subscribe(response => {
+        this.totalPages = response.total_pages;
+        this.movies = response.results.map(result => ({
+          poster: POSTER_BASE_URL + result.poster_path,
+          title: result.title,
+          releaseDate: moment(result.release_date).toDate(),
+          overview: result.overview
+        }));
+        this.noResults = this.movies.length === 0;
+        this.searched = this.searchQuery;
+      });
+  }
 
-	changePage(page: number): void {
-		this.currentPage = page;
-		this.searchResults.nativeElement.scrollIntoView({ behavior: 'smooth' });
-		this.fetchMovies();
-	}
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.searchResults.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    this.fetchMovies();
+  }
 }

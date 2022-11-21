@@ -3,29 +3,29 @@ import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
-	selector: 'app-theme-toggle',
-	templateUrl: './theme-toggle.component.html',
-	styleUrls: ['./theme-toggle.component.scss']
+  selector: 'app-theme-toggle',
+  templateUrl: './theme-toggle.component.html',
+  styleUrls: ['./theme-toggle.component.scss']
 })
 export class ThemeToggleComponent implements OnInit, OnDestroy {
-	isDarkMode!: boolean;
-	themeListener!: Subscription;
+  isDarkMode!: boolean;
+  themeListener!: Subscription;
 
-	constructor(private theme: ThemeService) {}
+  constructor(private theme: ThemeService) {}
 
-	ngOnInit(): void {
-		this.themeListener = this.theme.listenTheme().subscribe(isDarkMode => {
-			if (isDarkMode !== null) {
-				this.isDarkMode = isDarkMode;
-			}
-		});
-	}
+  ngOnInit(): void {
+    this.themeListener = this.theme.listenTheme().subscribe(isDarkMode => {
+      if (isDarkMode !== null) {
+        this.isDarkMode = isDarkMode;
+      }
+    });
+  }
 
-	toggleTheme(): void {
-		this.theme.changeTheme(!this.isDarkMode);
-	}
+  toggleTheme(): void {
+    this.theme.changeTheme(!this.isDarkMode);
+  }
 
-	ngOnDestroy(): void {
-		this.themeListener.unsubscribe();
-	}
+  ngOnDestroy(): void {
+    this.themeListener.unsubscribe();
+  }
 }
