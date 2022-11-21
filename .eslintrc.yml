@@ -14,7 +14,6 @@ parserOptions:
       # "./tsconfig.base.json",
       "./tsconfig.spec.json",
     ]
-  extraFileExtensions: .yml
 plugins:
   - "@typescript-eslint"
 rules:
