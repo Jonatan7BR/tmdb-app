@@ -24,6 +24,10 @@
   margin: auto;
   width: min(100%, 1000px);
   box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 }
 
 .search-pagination {
