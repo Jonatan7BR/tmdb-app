@@ -7,12 +7,14 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'Trending Movies'
   },
   {
     path: 'search',
     pathMatch: 'full',
-    component: SearchComponent
+    component: SearchComponent,
+    title: 'Search Movies'
   }
 ];
 
