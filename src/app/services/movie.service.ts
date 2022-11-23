@@ -20,4 +20,8 @@ export class MovieService {
     );
   }
 
+  getTrending (): Observable<MovieResponse> {
+    return this.http.get<MovieResponse>(`${apiBase}trending/movie/day?api_key=${apiKey}`);
+  }
+
 }

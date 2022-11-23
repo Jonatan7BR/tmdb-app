@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './card/card.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ThemeToggleComponent,
     PaginationComponent
   ],
-  imports: [CommonModule, ImgFallbackModule],
+  imports: [CommonModule, ImgFallbackModule, RouterModule],
   exports: [
     HeaderComponent,
     CardComponent,
