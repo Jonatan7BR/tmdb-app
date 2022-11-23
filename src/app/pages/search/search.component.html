@@ -1,0 +1,47 @@
+<form class="search-form" ngNativeValidate (ngSubmit)="fetchMovies()">
+  <input
+    type="search"
+    [(ngModel)]="searchQuery"
+    name="searchQuery"
+    class="searchfield"
+    required
+  />
+  <button
+    type="submit"
+    class="searchsubmit material-symbols-outlined"
+    title="Search"
+  >
+    search
+  </button>
+  <button
+    type="reset"
+    class="searchreset material-symbols-outlined"
+    title="Clear"
+  >
+    close
+  </button>
+</form>
+
+<div class="search-results" #searchResults>
+  <ng-container *ngIf="movies.length > 0; else noMovies">
+    <app-card
+      *ngFor="let movie of movies"
+      [poster]="movie.poster"
+      [title]="movie.title"
+      [releaseDate]="movie.releaseDate"
+      [overview]="movie.overview"
+    ></app-card>
+  </ng-container>
+  <ng-template #noMovies>
+    <p *ngIf="noResults">No results found for "{{ searched }}"</p>
+  </ng-template>
+</div>
+
+<div *ngIf="movies.length > 0" class="search-pagination">
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="changePage($event)"
+  >
+  </app-pagination>
+</div>

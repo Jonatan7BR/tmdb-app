@@ -1,0 +1,36 @@
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px auto;
+
+  > .searchfield {
+    font-size: 18pt;
+    font-family: var(--sans-serif);
+  }
+
+  > .searchsubmit,
+  > .searchreset {
+    cursor: pointer;
+  }
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 8px;
+  padding: 8px;
+  margin: auto;
+  width: min(100%, 1000px);
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
+}
+
+.search-pagination {
+  display: flex;
+  justify-content: center;
+}
