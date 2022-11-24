@@ -1,0 +1,25 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: auto;
+  width: min(100%, 500px);
+
+  > .field,
+  > .submit {
+    font-size: 18pt;
+    font-family: var(--sans-serif);
+  }
+
+  > .submit {
+    cursor: pointer;
+  }
+
+  > .error {
+    font-size: 10pt;
+    text-align: center;
+  }
+}
